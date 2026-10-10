@@ -222,7 +222,7 @@ export default function Home() {
 
       {/* مهارت‌ها */}
       <section id="skills" className="flex min-h-screen items-center px-6 py-24">
-        <div className="mx-auto w-full max-w-6xl">
+        <div className="mx-auto w-full max-w-6xl rounded-3xl border border-border bg-surface/40 p-8 backdrop-blur-xl sm:p-12">
           <p className="font-display text-sm font-medium uppercase tracking-widest text-accent">
             Skills
           </p>

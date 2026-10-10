@@ -54,41 +54,51 @@ const toVec = (p: [number, number, number]) => new THREE.Vector3(p[0], p[1], p[2
 function computeLayout(viewWidth: number, viewHeight: number) {
   const halfW = viewWidth / 2;
   const halfH = viewHeight / 2;
-  const MARGIN = 1; // حاشیه از لبه‌ها
   const SAFE = 1.12; // حاشیه‌ی امن برای بزرگ‌نمایی پرسپکتیو نودهای نزدیک
   const aspect = viewWidth / Math.max(viewHeight, 1);
 
+  const baseReach = Math.max(
+    ...NODES.map((n) => Math.hypot(n.position[0], n.position[2])),
+  );
   const baseMaxBx = Math.max(...NODES.map((n) => Math.abs(n.position[0])));
   const baseMaxBz = Math.max(...NODES.map((n) => Math.abs(n.position[2])));
   const baseMaxBy = Math.max(...NODES.map((n) => Math.abs(n.position[1])));
 
   if (aspect < 1) {
-    // موبایل: پخش در طول صفحه
-    const STRETCH_Y = 2.0;
-    const SQUEEZE = 0.45;
+    // موبایل: صفحه باریک و بلند است. عرض/عمق را طوری مقیاس می‌دهیم که نسبتِ
+    // کاروان نودها با نسبت صفحه هماهنگ شود و کل عرض پر شود؛ به‌جای اینکه
+    // همه‌ی نودها وسط جمع شوند. حاشیه هم نسبی است تا روی صفحه‌ی باریک
+    // نیمی از عرض هدر نرود.
+    const MARGIN = Math.min(viewWidth, viewHeight) * 0.07;
+    const availW = Math.max(halfW - MARGIN, 0.1);
+    const availH = Math.max(halfH - MARGIN, 0.1);
+
+    const stretchXZ = THREE.MathUtils.clamp(
+      (aspect * baseMaxBy) / baseReach,
+      0.4,
+      1.4,
+    );
 
     const nodes = NODES.map((n) => ({
       ...n,
       position: [
-        n.position[0] * SQUEEZE,
-        n.position[1] * STRETCH_Y,
-        n.position[2] * SQUEEZE,
+        n.position[0] * stretchXZ,
+        n.position[1],
+        n.position[2] * stretchXZ,
       ] as [number, number, number],
     }));
 
     const maxBy = Math.max(...nodes.map((n) => Math.abs(n.position[1])));
-    const reachX = Math.max(
+    const reach = Math.max(
       ...nodes.map((n) => Math.hypot(n.position[0], n.position[2])),
     );
 
-    const scale = Math.min(
-      (halfH - MARGIN) / (maxBy * SAFE),
-      (halfW - MARGIN) / (reachX * SAFE),
-    );
+    const scale = Math.min(availH / (maxBy * SAFE), availW / (reach * SAFE));
     return { nodes, scale: Math.max(scale, 0.05) };
   }
 
   // دسکتاپ: کشش افقی برای پر کردن عرض
+  const MARGIN = 1; // حاشیه از لبه‌ها
   const targetRatio = (halfW - MARGIN) / Math.max(halfH - MARGIN, 0.5);
   let stretchX =
     Math.sqrt(
