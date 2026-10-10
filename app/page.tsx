@@ -109,33 +109,103 @@ export default function Home() {
 
       {/* درباره من */}
       <section id="about" className="flex min-h-screen items-center px-6 py-24">
-        <div className="mx-auto w-full max-w-6xl">
-          <p className="font-display text-sm font-medium uppercase tracking-widest text-accent">
-            About
-          </p>
-          <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-4xl">
-            درباره‌ی من
-          </h2>
+        <div className="mx-auto w-full max-w-6xl rounded-3xl border border-border bg-surface/40 p-8 backdrop-blur-xl sm:p-12">
+          <div className="grid gap-10 lg:grid-cols-3">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <p className="font-display text-sm font-medium uppercase tracking-widest text-accent">
+                About
+              </p>
+              <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-4xl">
+                درباره‌ی من
+              </h2>
+            </div>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
-            <div className="rounded-2xl border border-border bg-surface/40 p-6 backdrop-blur-xl">
-              <h3 className="font-semibold text-foreground">تمرکز من</h3>
-              <p className="mt-3 text-sm leading-7 text-muted">
-                طراحی و پیاده‌سازی APIها و سرویس‌های بک‌اند با معماری تمیز و
-                مقیاس‌پذیر.
+            <div className="space-y-6 text-base leading-9 text-muted lg:col-span-2">
+              <p className="text-lg leading-10 text-slate-200">
+                من یک{" "}
+                <strong className="font-semibold text-foreground">
+                  توسعه‌دهنده نرم‌افزار
+                </strong>{" "}
+                هستم که تمرکزم بر طراحی و توسعه{" "}
+                <strong className="font-semibold text-foreground">
+                  سیستم‌های بک‌اند
+                </strong>
+                ،{" "}
+                <strong className="font-semibold text-foreground">
+                  معماری نرم‌افزار
+                </strong>{" "}
+                و ساخت محصولات دیجیتال مقیاس‌پذیر است.
               </p>
-            </div>
-            <div className="rounded-2xl border border-border bg-surface/40 p-6 backdrop-blur-xl">
-              <h3 className="font-semibold text-foreground">تجربه</h3>
-              <p className="mt-3 text-sm leading-7 text-muted">
-                کار با پایگاه‌داده‌های رابطه‌ای، کش، صف پیام و زیرساخت‌های
-                ابری.
+              <p>
+                برای من، برنامه‌نویسی صرفاً نوشتن کد نیست؛ بلکه پیدا کردن{" "}
+                <strong className="font-semibold text-foreground">
+                  راه‌حل‌های درست
+                </strong>{" "}
+                برای مسائل پیچیده، طراحی{" "}
+                <strong className="font-semibold text-foreground">
+                  ساختارهای قابل نگهداری
+                </strong>{" "}
+                و ساخت سیستم‌هایی است که در دنیای واقعی{" "}
+                <strong className="font-semibold text-foreground">
+                  عملکرد قابل اتکا
+                </strong>
+                یی داشته باشند.
               </p>
-            </div>
-            <div className="rounded-2xl border border-border bg-surface/40 p-6 backdrop-blur-xl">
-              <h3 className="font-semibold text-foreground">ارزش‌ها</h3>
-              <p className="mt-3 text-sm leading-7 text-muted">
-                کد تمیز، تست‌پذیری و عملکرد. چیزی که می‌سازم باید قابل اتکا
+              <p>
+                در مسیر توسعه نرم‌افزار، روی طراحی و پیاده‌سازی{" "}
+                <strong className="font-semibold text-foreground">APIها</strong>،{" "}
+                <strong className="font-semibold text-foreground">
+                  سیستم‌های احراز هویت
+                </strong>
+                ،{" "}
+                <strong className="font-semibold text-foreground">
+                  پایگاه‌های داده
+                </strong>
+                ،{" "}
+                <strong className="font-semibold text-foreground">
+                  ارتباطات بلادرنگ
+                </strong>{" "}
+                و{" "}
+                <strong className="font-semibold text-foreground">
+                  معماری سرویس‌ها
+                </strong>{" "}
+                کار کرده‌ام. همچنین به اتوماسیون فرایندهای توسعه،{" "}
+                <strong className="font-semibold text-foreground">CI/CD</strong>،{" "}
+                <strong className="font-semibold text-foreground">زیرساخت</strong>{" "}
+                و{" "}
+                <strong className="font-semibold text-foreground">
+                  بهبود کیفیت کد
+                </strong>{" "}
+                اهمیت می‌دهم.
+              </p>
+              <p>
+                رویکرد من در توسعه، ترکیبی از{" "}
+                <strong className="font-semibold text-foreground">سادگی</strong>،{" "}
+                <strong className="font-semibold text-foreground">
+                  تفکر مهندسی
+                </strong>{" "}
+                و{" "}
+                <strong className="font-semibold text-foreground">
+                  انتخاب آگاهانه ابزارها
+                </strong>
+                ست. به‌جای پیچیده کردن بی‌دلیل سیستم‌ها، سعی می‌کنم راه‌حل‌هایی
+                طراحی کنم که در کنار پاسخ‌گویی به نیازهای امروز، برای توسعه و
+                تغییرات آینده نیز آماده باشند.
+              </p>
+              <p>
+                این وب‌سایت فضایی برای{" "}
+                <strong className="font-semibold text-foreground">
+                  معرفی پروژه‌ها
+                </strong>
+                ،{" "}
+                <strong className="font-semibold text-foreground">
+                  اشتراک‌گذاری تجربه‌ها
+                </strong>{" "}
+                و نمایش مسیر حرفه‌ای من در دنیای مهندسی نرم‌افزار است.
+              </p>
+              <p className="rounded-2xl border border-accent/25 bg-accent/5 p-6 font-semibold leading-9 text-foreground">
+                هدف من ساخت نرم‌افزاری است که فقط کار نکند؛ بلکه{" "}
+                <span className="text-accent">اصولی، قابل اعتماد و آماده رشد</span>{" "}
                 باشد.
               </p>
             </div>
