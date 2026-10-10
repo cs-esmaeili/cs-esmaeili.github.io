@@ -1,4 +1,4 @@
-import { ArrowUpRight, Mail, MapPin } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Mail, MapPin } from "lucide-react";
 
 const SKILLS = [
   "NestJS",
@@ -54,39 +54,56 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* هیرو */}
-      <section className="flex min-h-screen items-center px-6">
-        <div className="w-full max-w-2xl rounded-3xl border border-border bg-surface/40 p-8 backdrop-blur-xl sm:p-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+      <section className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center">
+        {/* هاله‌ی ملایم برای خوانایی متن روی انیمیشن */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(15,23,42,0.92)_0%,rgba(15,23,42,0.55)_50%,rgba(15,23,42,0.2)_78%)]"
+        />
+
+        <div className="relative flex flex-col items-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs font-medium text-accent">
             <span className="h-2 w-2 animate-pulse rounded-full bg-accent" />
             آماده‌ی همکاری
           </div>
 
-          <h1 className="mt-6 text-4xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-6xl">
+          <h1 className="mt-7 max-w-4xl text-4xl font-bold leading-[1.12] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
             توسعه‌دهنده‌ی{" "}
-            <span className="text-accent">بک‌اند</span>
+            <span className="bg-[linear-gradient(to_left,#22c55e,#86efac)] bg-clip-text text-transparent">
+              بک‌اند
+            </span>
           </h1>
 
-          <p className="mt-6 max-w-lg text-lg leading-9 text-muted">
+          <p className="mt-7 max-w-xl text-lg leading-9 text-slate-300">
             با NestJS، TypeScript و دوستان، سیستم‌های مقیاس‌پذیر و قابل اتکا
             می‌سازم.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-background transition-colors duration-200 hover:bg-green-400"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 text-sm font-semibold text-background shadow-lg shadow-accent/20 transition-colors duration-200 hover:bg-green-400"
             >
               مشاهده‌ی نمونه‌کارها
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground transition-colors duration-200 hover:border-accent/50 hover:text-accent"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/40 px-7 py-3 text-sm font-semibold text-foreground backdrop-blur transition-colors duration-200 hover:border-accent/50 hover:text-accent"
             >
               تماس با من
             </a>
           </div>
         </div>
+
+        {/* نشانگر اسکرول */}
+        <a
+          href="#about"
+          className="absolute bottom-8 flex flex-col items-center gap-2 text-xs text-muted transition-colors duration-200 hover:text-accent"
+        >
+          <span>اسکرول برای ادامه</span>
+          <ChevronDown className="h-4 w-4 animate-bounce" />
+        </a>
       </section>
 
       {/* درباره من */}
