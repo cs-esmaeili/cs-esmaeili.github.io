@@ -1,15 +1,19 @@
+import Image from "next/image";
 import { ArrowUpRight, ChevronDown, Mail, MapPin } from "lucide-react";
 import GithubIcon from "@/components/GithubIcon";
 
 const SKILLS = [
-  "NestJS",
-  "TypeScript",
-  "Node.js",
-  "PostgreSQL",
-  "Redis",
-  "Docker",
-  "Prisma",
-  "GraphQL",
+  { name: "NestJS", icon: "/icons/nestjs.svg" },
+  { name: "TypeScript", icon: "/icons/typescript.svg" },
+  { name: "Node.js", icon: "/icons/nodedotjs.svg" },
+  { name: "PostgreSQL", icon: "/icons/postgresql.svg" },
+  { name: "Redis", icon: "/icons/redis.svg" },
+  { name: "Docker", icon: "/icons/docker.svg" },
+  { name: "Prisma", icon: "/icons/prisma.svg" },
+  { name: "Drizzle", icon: "/icons/drizzle.svg" },
+  { name: "Elasticsearch", icon: "/icons/elasticsearch.svg" },
+  { name: "RabbitMQ", icon: "/icons/rabbitmq.svg" },
+  { name: "Jenkins", icon: "/icons/jenkins.svg" },
 ];
 
 const PROJECTS = [
@@ -41,7 +45,7 @@ const PROJECTS = [
     name: "سرویس ابری",
     desc: "یک API عمومی برای سرویس‌های ابری با محدودیت نرخ.",
     url: "https://example.com",
-    tags: ["NestJS", "GraphQL"],
+    tags: ["NestJS", "Elasticsearch"],
   },
   {
     name: "چت آنی",
@@ -76,7 +80,7 @@ export default function Home() {
           </h1>
 
           <p className="mt-7 max-w-xl text-lg leading-9 text-slate-300">
-            با NestJS، TypeScript و دوستان، سیستم‌های مقیاس‌پذیر و قابل اتکا
+            با NestJS، TypeScript ، سیستم‌های مقیاس‌پذیر و قابل اتکا
             می‌سازم.
           </p>
 
@@ -225,12 +229,22 @@ export default function Home() {
 
           <div className="mt-10 flex flex-wrap gap-3">
             {SKILLS.map((skill) => (
-              <span
-                key={skill}
-                className="rounded-full border border-border bg-surface/50 px-4 py-2 font-mono text-sm text-slate-200 transition-colors duration-200 hover:border-accent/50 hover:text-accent"
+              <div
+                key={skill.name}
+                className="flex items-center gap-3 rounded-full border border-border bg-surface/50 px-4 py-2 transition-colors duration-200 hover:border-accent/40"
               >
-                {skill}
-              </span>
+                <Image
+                  src={skill.icon}
+                  alt={skill.name}
+                  width={24}
+                  height={24}
+                  unoptimized
+                  className="h-6 w-6"
+                />
+                <span className="text-sm font-medium text-slate-200">
+                  {skill.name}
+                </span>
+              </div>
             ))}
           </div>
         </div>
