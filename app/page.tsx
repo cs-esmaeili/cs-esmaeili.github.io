@@ -12,40 +12,49 @@ const SKILLS = [
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/* هیرو — پشتش شبکه‌ی سه‌بعدی استک‌ها */}
+      {/* هیرو */}
       <section className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-        <h1 className="max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-white sm:text-6xl">
+        <span className="font-pixel text-xs text-accent">
+          [ BACKEND DEVELOPER ]
+        </span>
+        <h1 className="mt-6 max-w-3xl text-3xl font-bold leading-snug text-foreground sm:text-5xl">
           سلام، من یک توسعه‌دهنده‌ی بک‌اند هستم.
         </h1>
-        <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-300">
+        <p className="mt-6 max-w-xl text-lg leading-9 text-muted">
           با NestJS، TypeScript و دوستان، یک شبکه از تکنولوژی‌ها می‌سازم. اسکرول
           کن تا شبکه بچرخد و باز شود.
         </p>
-        <p className="mt-12 animate-bounce text-sm text-zinc-500">
-          ↓ برای ادامه اسکرول کن
+        <p className="font-pixel mt-12 text-[11px] text-accent/70">
+          SCROLL ↓
         </p>
       </section>
 
+      <div className="pixel-divider mx-auto max-w-6xl" />
+
       {/* درباره من */}
       <section id="about" className="flex min-h-screen items-center px-6">
-        <div className="mx-auto w-full max-w-2xl rounded-2xl border border-white/10 bg-black/30 p-8 backdrop-blur-md">
-          <h2 className="text-2xl font-semibold text-white">درباره من</h2>
-          <p className="mt-4 leading-8 text-zinc-300">
+        <div className="mx-auto w-full max-w-2xl border-2 border-border bg-background/60 p-8 backdrop-blur-md">
+          <span className="font-pixel text-[11px] text-accent">ABOUT</span>
+          <h2 className="mt-3 text-2xl font-bold text-foreground">درباره من</h2>
+          <p className="mt-4 leading-9 text-muted">
             اینجا یک متن ساده‌ی معرفی است. سیستم‌های بک‌اند مقیاس‌پذیر با NestJS
             می‌سازم و روی معماری، پایگاه‌داده و کارایی تمرکز دارم.
           </p>
         </div>
       </section>
 
+      <div className="pixel-divider mx-auto max-w-6xl" />
+
       {/* مهارت‌ها */}
       <section id="skills" className="flex min-h-screen items-center px-6">
-        <div className="mx-auto w-full max-w-2xl rounded-2xl border border-white/10 bg-black/30 p-8 backdrop-blur-md">
-          <h2 className="text-2xl font-semibold text-white">مهارت‌ها</h2>
+        <div className="mx-auto w-full max-w-2xl border-2 border-border bg-background/60 p-8 backdrop-blur-md">
+          <span className="font-pixel text-[11px] text-accent">SKILLS</span>
+          <h2 className="mt-3 text-2xl font-bold text-foreground">مهارت‌ها</h2>
           <div className="mt-6 flex flex-wrap gap-3">
             {SKILLS.map((skill) => (
               <span
                 key={skill}
-                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-zinc-200"
+                className="font-pixel border-2 border-border bg-background/70 px-3 py-2 text-[11px] text-foreground"
               >
                 {skill}
               </span>
@@ -54,19 +63,22 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="pixel-divider mx-auto max-w-6xl" />
+
       {/* تماس */}
       <section
         id="contact"
         className="flex min-h-screen flex-col items-center justify-center px-6 text-center"
       >
-        <h2 className="text-3xl font-semibold text-white sm:text-5xl">
+        <span className="font-pixel text-[11px] text-accent">CONTACT</span>
+        <h2 className="mt-3 text-3xl font-bold text-foreground sm:text-5xl">
           بیا با هم کار کنیم.
         </h2>
         <a
           href="mailto:hello@example.com"
-          className="mt-8 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-zinc-200"
+          className="font-pixel mt-8 inline-block border-2 border-accent bg-accent px-6 py-3 text-[12px] text-background shadow-[4px_4px_0_0_#1e3a2b] transition-transform hover:-translate-y-0.5"
         >
-          تماس با من
+          CONTACT ME
         </a>
       </section>
     </div>

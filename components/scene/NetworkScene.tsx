@@ -3,26 +3,27 @@
 import { useEffect, useRef } from "react";
 import type { RefObject } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Html, Line } from "@react-three/drei";
+import { Billboard, Html, Line, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
 type NodeDef = {
   name: string;
   color: string;
+  icon: string;
   position: [number, number, number];
 };
 
 // استک — برای تغییر، همین آرایه را ویرایش کن.
 const NODES: NodeDef[] = [
-  { name: "Node.js", color: "#5FA04E", position: [0, 0, 0] },
-  { name: "NestJS", color: "#E0234E", position: [1.7, 0.7, 0.3] },
-  { name: "TypeScript", color: "#3178C6", position: [-1.7, 0.6, 0.2] },
-  { name: "React", color: "#61DAFB", position: [1.4, -1.1, -0.4] },
-  { name: "Next.js", color: "#FFFFFF", position: [-1.4, -1.0, -0.5] },
-  { name: "PostgreSQL", color: "#4169E1", position: [0.1, 1.8, -0.7] },
-  { name: "Redis", color: "#FF4438", position: [-0.2, -1.9, 0.5] },
-  { name: "Docker", color: "#2496ED", position: [2.2, -0.3, -1.1] },
-  { name: "Prisma", color: "#5A67D8", position: [-2.2, -0.4, -1.2] },
+  { name: "Node.js", color: "#5FA04E", icon: "/icons/nodedotjs.svg", position: [0, 0, 0] },
+  { name: "NestJS", color: "#E0234E", icon: "/icons/nestjs.svg", position: [1.7, 0.7, 0.3] },
+  { name: "TypeScript", color: "#3178C6", icon: "/icons/typescript.svg", position: [-1.7, 0.6, 0.2] },
+  { name: "React", color: "#61DAFB", icon: "/icons/react.svg", position: [1.4, -1.1, -0.4] },
+  { name: "Next.js", color: "#FFFFFF", icon: "/icons/nextdotjs.svg", position: [-1.4, -1.0, -0.5] },
+  { name: "PostgreSQL", color: "#4169E1", icon: "/icons/postgresql.svg", position: [0.1, 1.8, -0.7] },
+  { name: "Redis", color: "#FF4438", icon: "/icons/redis.svg", position: [-0.2, -1.9, 0.5] },
+  { name: "Docker", color: "#2496ED", icon: "/icons/docker.svg", position: [2.2, -0.3, -1.1] },
+  { name: "Prisma", color: "#5A67D8", icon: "/icons/prisma.svg", position: [-2.2, -0.4, -1.2] },
 ];
 
 // یال‌ها (ارتباط بین گره‌ها) بر اساس ایندکس در NODES.
@@ -43,26 +44,34 @@ const PULSES: { edge: number; speed: number; offset: number }[] = [
 
 const toVec = (p: [number, number, number]) => new THREE.Vector3(p[0], p[1], p[2]);
 
-function Node({ def }: { def: NodeDef }) {
+function Technology({ def }: { def: NodeDef }) {
+  const texture = useTexture(def.icon, (t) => {
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = 4;
+  });
+
   return (
     <group position={def.position}>
-      <mesh>
-        <sphereGeometry args={[0.16, 32, 32]} />
-        <meshStandardMaterial
-          color={def.color}
-          emissive={def.color}
-          emissiveIntensity={1.4}
-          roughness={0.35}
-          metalness={0.2}
-          toneMapped={false}
-        />
-      </mesh>
-      <mesh>
-        <sphereGeometry args={[0.3, 24, 24]} />
-        <meshBasicMaterial color={def.color} transparent opacity={0.13} toneMapped={false} />
-      </mesh>
-      <Html center distanceFactor={9} style={{ pointerEvents: "none" }}>
-        <span className="whitespace-nowrap rounded-full border border-white/10 bg-black/60 px-2 py-0.5 text-[10px] leading-none text-white/80">
+      <Billboard>
+        {/* هالهی ملایم پشت آیکون */}
+        <mesh position={[0, 0, -0.02]}>
+          <circleGeometry args={[0.42, 40]} />
+          <meshBasicMaterial color={def.color} transparent opacity={0.12} toneMapped={false} />
+        </mesh>
+        {/* خود آیکون */}
+        <mesh>
+          <planeGeometry args={[0.62, 0.62]} />
+          <meshBasicMaterial map={texture} transparent toneMapped={false} depthWrite={false} />
+        </mesh>
+      </Billboard>
+
+      <Html
+        center
+        position={[0, -0.52, 0]}
+        distanceFactor={9}
+        style={{ pointerEvents: "none" }}
+      >
+        <span className="font-pixel whitespace-nowrap border-2 border-border bg-background/90 px-2 py-0.5 text-[9px] leading-none text-accent">
           {def.name}
         </span>
       </Html>
@@ -147,15 +156,15 @@ function Network({
             <Line
               key={i}
               points={[NODES[a].position, NODES[b].position]}
-              color="#64748b"
+              color="#3ddc84"
               lineWidth={1}
               transparent
-              opacity={0.35}
+              opacity={0.18}
             />
           ))}
 
           {NODES.map((n) => (
-            <Node key={n.name} def={n} />
+            <Technology key={n.name} def={n} />
           ))}
 
           {PULSES.map((p, i) => {
@@ -217,13 +226,13 @@ export default function NetworkScene() {
 
   return (
     <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 7], fov: 45 }} gl={{ antialias: true }}>
-      <color attach="background" args={["#08090d"]} />
-      <fog attach="fog" args={["#08090d", 6, 15]} />
+      <color attach="background" args={["#060a08"]} />
+      <fog attach="fog" args={["#060a08", 6, 15]} />
 
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[4, 6, 6]} intensity={1.5} />
-      <pointLight position={[-6, -2, 3]} intensity={35} color="#34d399" />
-      <pointLight position={[6, 3, 3]} intensity={30} color="#a78bfa" />
+      <ambientLight intensity={0.7} />
+      <directionalLight position={[4, 6, 6]} intensity={1.6} />
+      <pointLight position={[-6, -2, 3]} intensity={40} color="#3ddc84" />
+      <pointLight position={[6, 3, 3]} intensity={30} color="#22d3ee" />
 
       <Network progress={progress} pointer={pointer} />
     </Canvas>
