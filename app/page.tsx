@@ -72,10 +72,12 @@ export default function Home() {
             آماده‌ی همکاری
           </div>
 
-          <h1 className="mt-7 max-w-4xl text-4xl font-bold leading-[1.12] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-            توسعه‌دهنده‌ی{" "}
-            <span className="bg-[linear-gradient(to_left,#22c55e,#86efac)] bg-clip-text text-transparent">
-              بک‌اند
+          <h1 className="mt-7 flex max-w-4xl flex-col items-center font-bold tracking-tight text-foreground">
+            <span className="text-4xl leading-[1.12] sm:text-6xl lg:text-7xl">
+              جواد اسماعیلی
+            </span>
+            <span className="mt-3 bg-[linear-gradient(to_left,#22c55e,#86efac)] bg-clip-text text-2xl text-transparent sm:text-4xl">
+              توسعه‌دهنده‌ی بک‌اند
             </span>
           </h1>
 
