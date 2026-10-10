@@ -143,20 +143,16 @@ function makeDigitTexture(char: string, color: string) {
 function Technology({ def }: { def: NodeDef }) {
   const texture = useTexture(def.icon, (t) => {
     t.colorSpace = THREE.SRGBColorSpace;
-    // فیلتر نزدیک‌ترین همسایه => ظاهر پیکسلی
-    t.magFilter = THREE.NearestFilter;
-    t.minFilter = THREE.NearestFilter;
-    t.generateMipmaps = false;
-    t.needsUpdate = true;
+    t.anisotropy = 4;
   });
 
   return (
     <group position={def.position}>
       <Billboard>
-        {/* هالهی هشت‌ضلعی پشت آیکون (پیکسلی‌تر از دایره) */}
+        {/* هاله‌ی نرم پشت آیکون */}
         <mesh position={[0, 0, -0.02]}>
-          <circleGeometry args={[0.32, 8]} />
-          <meshBasicMaterial color={def.color} transparent opacity={0.14} toneMapped={false} />
+          <circleGeometry args={[0.32, 48]} />
+          <meshBasicMaterial color={def.color} transparent opacity={0.12} toneMapped={false} />
         </mesh>
         {/* آیکون */}
         <mesh>
@@ -171,7 +167,7 @@ function Technology({ def }: { def: NodeDef }) {
         distanceFactor={9}
         style={{ pointerEvents: "none" }}
       >
-        <span className="font-pixel whitespace-nowrap border-2 border-border bg-background/90 px-2 py-0.5 text-[9px] leading-none text-accent">
+        <span className="font-mono whitespace-nowrap rounded-full border border-white/10 bg-slate-900/80 px-2.5 py-1 text-[10px] leading-none text-slate-300">
           {def.name}
         </span>
       </Html>
@@ -194,7 +190,7 @@ function Pulse({
 }) {
   const group = useRef<THREE.Group>(null);
   const mesh = useRef<THREE.Mesh>(null);
-  const texture = useMemo(() => makeDigitTexture(char, "#3ddc84"), [char]);
+  const texture = useMemo(() => makeDigitTexture(char, "#22c55e"), [char]);
 
   useFrame((state) => {
     const g = group.current;
@@ -267,10 +263,10 @@ function Network({
             <Line
               key={i}
               points={[layout.nodes[a].position, layout.nodes[b].position]}
-              color="#3ddc84"
+              color="#22c55e"
               lineWidth={1}
               transparent
-              opacity={0.18}
+              opacity={0.15}
             />
           ))}
 
@@ -336,14 +332,14 @@ export default function NetworkScene() {
   }, []);
 
   return (
-    <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 9.5], fov: 45 }} gl={{ antialias: true }}>
-      <color attach="background" args={["#060a08"]} />
-      <fog attach="fog" args={["#060a08", 12, 26]} />
+    <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 9.5], fov:45 }} gl={{ antialias: true }}>
+      <color attach="background" args={["#0f172a"]} />
+      <fog attach="fog" args={["#0f172a", 12, 26]} />
 
       <ambientLight intensity={0.7} />
       <directionalLight position={[4, 6, 6]} intensity={1.6} />
-      <pointLight position={[-6, -2, 3]} intensity={40} color="#3ddc84" />
-      <pointLight position={[6, 3, 3]} intensity={30} color="#22d3ee" />
+      <pointLight position={[-6, -2, 3]} intensity={40} color="#22c55e" />
+      <pointLight position={[6, 3, 3]} intensity={30} color="#38bdf8" />
 
       <Network progress={progress} pointer={pointer} />
     </Canvas>

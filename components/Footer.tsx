@@ -8,15 +8,15 @@ async function CopyrightYear() {
 
 export default function Footer() {
   return (
-    <footer className="mt-auto w-full border-t-2 border-border bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
-        <p className="font-pixel text-[11px] text-muted">
+    <footer className="mt-auto w-full border-t border-border">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 px-6 py-8 text-sm text-muted sm:flex-row">
+        <p>
           <Suspense fallback="© 2026">
             <CopyrightYear />
           </Suspense>{" "}
-          PORTFOLIO
+          Portfolio
         </p>
-        <p className="font-pixel text-[11px] text-muted">MADE WITH NESTJS</p>
+        <p className="font-mono text-xs">Built with NestJS &amp; Three.js</p>
       </div>
     </footer>
   );
