@@ -16,6 +16,9 @@ export default function Header() {
           <Link href="/#about" className="transition-colors hover:text-accent">
             درباره
           </Link>
+          <Link href="/#projects" className="transition-colors hover:text-accent">
+            نمونه‌کارها
+          </Link>
           <Link href="/#contact" className="transition-colors hover:text-accent">
             تماس
           </Link>

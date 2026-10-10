@@ -9,6 +9,46 @@ const SKILLS = [
   "GraphQL",
 ];
 
+// سایت‌هایی که ساخته‌ام — برای تغییر، همین آرایه را ویرایش کن.
+const PROJECTS = [
+  {
+    name: "فروشگاه آنلاین",
+    desc: "یک فروشگاه اینترنتی با پنل مدیریت و درگاه پرداخت.",
+    url: "https://example.com",
+    tags: ["Next.js", "NestJS", "PostgreSQL"],
+  },
+  {
+    name: "پلتفرم رزرو",
+    desc: "سیستم نوبت‌دهی و رزرو آنلاین برای کسب‌وکارها.",
+    url: "https://example.com",
+    tags: ["React", "NestJS", "Redis"],
+  },
+  {
+    name: "داشبورد تحلیلی",
+    desc: "داشبورد گزارش‌گیری با نمودارهای زنده و API اختصاصی.",
+    url: "https://example.com",
+    tags: ["TypeScript", "Docker"],
+  },
+  {
+    name: "اپلیکیشن محتوا",
+    desc: "پلتفرم انتشار محتوا با احراز هویت و اشتراک ویژه.",
+    url: "https://example.com",
+    tags: ["Next.js", "Prisma"],
+  },
+  {
+    name: "سرویس ابری",
+    desc: "یک API عمومی برای سرویس‌های ابری با محدودیت نرخ.",
+    url: "https://example.com",
+    tags: ["NestJS", "GraphQL"],
+  },
+  {
+    name: "چت آنی",
+    desc: "پیام‌رسان بلادرنگ با WebSocket و صف پیام.",
+    url: "https://example.com",
+    tags: ["Node.js", "Redis"],
+  },
+];
+
 export default function Home() {
   return (
     <div className="flex flex-col">
@@ -58,6 +98,52 @@ export default function Home() {
               >
                 {skill}
               </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="pixel-divider mx-auto max-w-6xl" />
+
+      {/* کارها / سایت‌هایی که ساخته‌ام */}
+      <section id="projects" className="flex min-h-screen flex-col justify-center px-6 py-24">
+        <div className="mx-auto w-full max-w-6xl">
+          <span className="font-pixel text-[11px] text-accent">PROJECTS</span>
+          <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
+            سایت‌هایی که ساخته‌ام
+          </h2>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {PROJECTS.map((project) => (
+              <a
+                key={project.name}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col border-2 border-border bg-background/60 p-6 backdrop-blur-md transition-colors hover:border-accent"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <h3 className="text-lg font-bold text-foreground">
+                    {project.name}
+                  </h3>
+                  <span className="font-pixel text-[11px] text-muted transition-colors group-hover:text-accent">
+                    ↗
+                  </span>
+                </div>
+                <p className="mt-3 text-sm leading-8 text-muted">
+                  {project.desc}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="font-pixel border border-border px-2 py-1 text-[10px] text-muted"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </a>
             ))}
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import type { RefObject } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Billboard, Html, Line, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -44,6 +44,78 @@ const PULSES: { edge: number; speed: number; offset: number }[] = [
 ];
 
 const toVec = (p: [number, number, number]) => new THREE.Vector3(p[0], p[1], p[2]);
+
+/**
+ * چیدمان واکنش‌گرا:
+ * - دسکتاپ (عرض ≥ ارتفاع): نودها افقی پخش می‌شوند تا عرضِ صفحه پر شود.
+ * - موبایل (صفحه‌ی باریک): نودها در طول صفحه (محور Y) پخش می‌شوند و عرض جمع می‌شود.
+ */
+function computeLayout(viewWidth: number, viewHeight: number) {
+  const halfW = viewWidth / 2;
+  const halfH = viewHeight / 2;
+  const MARGIN = 1; // حاشیه از لبه‌ها
+  const SAFE = 1.12; // حاشیه‌ی امن برای بزرگ‌نمایی پرسپکتیو نودهای نزدیک
+  const aspect = viewWidth / Math.max(viewHeight, 1);
+
+  const baseMaxBx = Math.max(...NODES.map((n) => Math.abs(n.position[0])));
+  const baseMaxBz = Math.max(...NODES.map((n) => Math.abs(n.position[2])));
+  const baseMaxBy = Math.max(...NODES.map((n) => Math.abs(n.position[1])));
+
+  if (aspect < 1) {
+    // موبایل: پخش در طول صفحه
+    const STRETCH_Y = 2.0;
+    const SQUEEZE = 0.45;
+
+    const nodes = NODES.map((n) => ({
+      ...n,
+      position: [
+        n.position[0] * SQUEEZE,
+        n.position[1] * STRETCH_Y,
+        n.position[2] * SQUEEZE,
+      ] as [number, number, number],
+    }));
+
+    const maxBy = Math.max(...nodes.map((n) => Math.abs(n.position[1])));
+    const reachX = Math.max(
+      ...nodes.map((n) => Math.hypot(n.position[0], n.position[2])),
+    );
+
+    const scale = Math.min(
+      (halfH - MARGIN) / (maxBy * SAFE),
+      (halfW - MARGIN) / (reachX * SAFE),
+    );
+    return { nodes, scale: Math.max(scale, 0.05) };
+  }
+
+  // دسکتاپ: کشش افقی برای پر کردن عرض
+  const targetRatio = (halfW - MARGIN) / Math.max(halfH - MARGIN, 0.5);
+  let stretchX =
+    Math.sqrt(
+      Math.max(Math.pow(targetRatio * baseMaxBy, 2) - baseMaxBz * baseMaxBz, 0),
+    ) / baseMaxBx;
+  stretchX = THREE.MathUtils.clamp(stretchX, 0.8, 2.6);
+
+  const nodes = NODES.map((n) => ({
+    ...n,
+    position: [n.position[0] * stretchX, n.position[1], n.position[2]] as [
+      number,
+      number,
+      number,
+    ],
+  }));
+
+  const maxBy = baseMaxBy;
+  const reachX = Math.max(
+    ...nodes.map((n) => Math.hypot(n.position[0], n.position[2])),
+  );
+
+  const scale = Math.min(
+    (halfH - MARGIN) / (maxBy * SAFE),
+    (halfW - MARGIN) / (reachX * SAFE),
+  );
+
+  return { nodes, scale: Math.max(scale, 0.05) };
+}
 
 // یک تکسچر کم‌رزولوشن از «0» یا «1» برای حالت پیکسلی.
 function makeDigitTexture(char: string, color: string) {
@@ -155,17 +227,17 @@ function Network({
   const scroll = useRef<THREE.Group>(null);
   const drift = useRef<THREE.Group>(null);
 
+  const viewW = useThree((state) => state.viewport.width);
+  const viewH = useThree((state) => state.viewport.height);
+  const layout = useMemo(() => computeLayout(viewW, viewH), [viewW, viewH]);
+
   useFrame((state, delta) => {
     const damp = THREE.MathUtils.damp;
 
     if (tilt.current) {
       tilt.current.rotation.x = damp(tilt.current.rotation.x, -pointer.current.y * 0.25, 3, delta);
       tilt.current.rotation.z = damp(tilt.current.rotation.z, pointer.current.x * 0.15, 3, delta);
-
-      // روی صفحه‌های باریک، کل شبکه کمی کوچک شود تا داخل کادر بماند
-      const aspect = state.size.width / state.size.height;
-      const fit = THREE.MathUtils.clamp(aspect / 1.5, 0.55, 1);
-      tilt.current.scale.setScalar(damp(tilt.current.scale.x, fit, 3, delta));
+      tilt.current.scale.setScalar(damp(tilt.current.scale.x, layout.scale, 3, delta));
     }
     if (scroll.current) {
       scroll.current.rotation.y = damp(
@@ -194,7 +266,7 @@ function Network({
           {EDGES.map(([a, b], i) => (
             <Line
               key={i}
-              points={[NODES[a].position, NODES[b].position]}
+              points={[layout.nodes[a].position, layout.nodes[b].position]}
               color="#3ddc84"
               lineWidth={1}
               transparent
@@ -202,7 +274,7 @@ function Network({
             />
           ))}
 
-          {NODES.map((n) => (
+          {layout.nodes.map((n) => (
             <Technology key={n.name} def={n} />
           ))}
 
@@ -211,8 +283,8 @@ function Network({
             return (
               <Pulse
                 key={i}
-                from={toVec(NODES[a].position)}
-                to={toVec(NODES[b].position)}
+                from={toVec(layout.nodes[a].position)}
+                to={toVec(layout.nodes[b].position)}
                 speed={p.speed}
                 offset={p.offset}
                 char={i % 2 === 0 ? "0" : "1"}
