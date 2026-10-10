@@ -1,19 +1,20 @@
 import Image from "next/image";
 import { ArrowUpRight, ChevronDown, Mail, MapPin } from "lucide-react";
 import GithubIcon from "@/components/GithubIcon";
+import { asset } from "@/lib/site";
 
 const SKILLS = [
-  { name: "NestJS", icon: "/icons/nestjs.svg" },
-  { name: "TypeScript", icon: "/icons/typescript.svg" },
-  { name: "Node.js", icon: "/icons/nodedotjs.svg" },
-  { name: "PostgreSQL", icon: "/icons/postgresql.svg" },
-  { name: "Redis", icon: "/icons/redis.svg" },
-  { name: "Docker", icon: "/icons/docker.svg" },
-  { name: "Prisma", icon: "/icons/prisma.svg" },
-  { name: "Drizzle", icon: "/icons/drizzle.svg" },
-  { name: "Elasticsearch", icon: "/icons/elasticsearch.svg" },
-  { name: "RabbitMQ", icon: "/icons/rabbitmq.svg" },
-  { name: "Jenkins", icon: "/icons/jenkins.svg" },
+  { name: "NestJS", icon: asset("/icons/nestjs.svg") },
+  { name: "TypeScript", icon: asset("/icons/typescript.svg") },
+  { name: "Node.js", icon: asset("/icons/nodedotjs.svg") },
+  { name: "PostgreSQL", icon: asset("/icons/postgresql.svg") },
+  { name: "Redis", icon: asset("/icons/redis.svg") },
+  { name: "Docker", icon: asset("/icons/docker.svg") },
+  { name: "Prisma", icon: asset("/icons/prisma.svg") },
+  { name: "Drizzle", icon: asset("/icons/drizzle.svg") },
+  { name: "Elasticsearch", icon: asset("/icons/elasticsearch.svg") },
+  { name: "RabbitMQ", icon: asset("/icons/rabbitmq.svg") },
+  { name: "Jenkins", icon: asset("/icons/jenkins.svg") },
 ];
 
 const PROJECTS = [

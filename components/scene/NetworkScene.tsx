@@ -5,6 +5,7 @@ import type { RefObject } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Billboard, Html, Line, useTexture } from "@react-three/drei";
 import * as THREE from "three";
+import { asset } from "@/lib/site";
 
 type NodeDef = {
   name: string;
@@ -16,15 +17,15 @@ type NodeDef = {
 // استک — برای تغییر، همین آرایه را ویرایش کن.
 // موقعیت‌ها نسبت به قبل جمع‌وجورتر شده‌اند.
 const NODES: NodeDef[] = [
-  { name: "Node.js", color: "#5FA04E", icon: "/icons/nodedotjs.svg", position: [0, 0, 0] },
-  { name: "NestJS", color: "#E0234E", icon: "/icons/nestjs.svg", position: [2.15, 0.85, 0.35] },
-  { name: "TypeScript", color: "#3178C6", icon: "/icons/typescript.svg", position: [-2.15, 0.75, 0.25] },
-  { name: "React", color: "#61DAFB", icon: "/icons/react.svg", position: [1.7, -1.35, -0.5] },
-  { name: "Next.js", color: "#FFFFFF", icon: "/icons/nextdotjs.svg", position: [-1.7, -1.25, -0.6] },
-  { name: "PostgreSQL", color: "#4169E1", icon: "/icons/postgresql.svg", position: [0.1, 2.2, -0.9] },
-  { name: "Redis", color: "#FF4438", icon: "/icons/redis.svg", position: [-0.25, -2.35, 0.6] },
-  { name: "Docker", color: "#2496ED", icon: "/icons/docker.svg", position: [2.7, -0.4, -1.35] },
-  { name: "Prisma", color: "#5A67D8", icon: "/icons/prisma.svg", position: [-2.7, -0.5, -1.5] },
+  { name: "Node.js", color: "#5FA04E", icon: asset("/icons/nodedotjs.svg"), position: [0, 0, 0] },
+  { name: "NestJS", color: "#E0234E", icon: asset("/icons/nestjs.svg"), position: [2.15, 0.85, 0.35] },
+  { name: "TypeScript", color: "#3178C6", icon: asset("/icons/typescript.svg"), position: [-2.15, 0.75, 0.25] },
+  { name: "React", color: "#61DAFB", icon: asset("/icons/react.svg"), position: [1.7, -1.35, -0.5] },
+  { name: "Next.js", color: "#FFFFFF", icon: asset("/icons/nextdotjs.svg"), position: [-1.7, -1.25, -0.6] },
+  { name: "PostgreSQL", color: "#4169E1", icon: asset("/icons/postgresql.svg"), position: [0.1, 2.2, -0.9] },
+  { name: "Redis", color: "#FF4438", icon: asset("/icons/redis.svg"), position: [-0.25, -2.35, 0.6] },
+  { name: "Docker", color: "#2496ED", icon: asset("/icons/docker.svg"), position: [2.7, -0.4, -1.35] },
+  { name: "Prisma", color: "#5A67D8", icon: asset("/icons/prisma.svg"), position: [-2.7, -0.5, -1.5] },
 ];
 
 // یال‌ها (ارتباط بین گره‌ها) بر اساس ایندکس در NODES.
