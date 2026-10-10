@@ -52,21 +52,23 @@ const PROJECTS = [
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/* هیرو */}
-      <section className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-        <span className="font-pixel text-xs text-accent">
-          [ BACKEND DEVELOPER ]
-        </span>
-        <h1 className="mt-6 max-w-3xl text-3xl font-bold leading-snug text-foreground sm:text-5xl">
-          سلام، من یک توسعه‌دهنده‌ی بک‌اند هستم.
-        </h1>
-        <p className="mt-6 max-w-xl text-lg leading-9 text-muted">
-          با NestJS، TypeScript و دوستان، یک شبکه از تکنولوژی‌ها می‌سازم. اسکرول
-          کن تا شبکه بچرخد و باز شود.
-        </p>
-        <p className="font-pixel mt-12 text-[11px] text-accent/70">
-          SCROLL ↓
-        </p>
+      {/* هیرو — متن سمت راست، روی پنل جدا از انیمیشن پس‌زمینه */}
+      <section className="flex min-h-screen items-center justify-center px-6 md:justify-start">
+        <div className="w-full max-w-xl border-2 border-border bg-background/75 p-8 text-center backdrop-blur-md md:text-right">
+          <span className="font-pixel text-xs text-accent">
+            [ BACKEND DEVELOPER ]
+          </span>
+          <h1 className="mt-5 text-3xl font-bold leading-snug text-foreground sm:text-4xl">
+            سلام، من یک توسعه‌دهنده‌ی بک‌اند هستم.
+          </h1>
+          <p className="mt-5 text-base leading-9 text-muted">
+            با NestJS، TypeScript و دوستان، یک شبکه از تکنولوژی‌ها می‌سازم.
+            اسکرول کن تا شبکه بچرخد و باز شود.
+          </p>
+          <p className="font-pixel mt-8 text-[11px] text-accent/70">
+            SCROLL ↓
+          </p>
+        </div>
       </section>
 
       <div className="pixel-divider mx-auto max-w-6xl" />
