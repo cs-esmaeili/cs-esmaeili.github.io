@@ -1,13 +1,13 @@
 import { ImageResponse } from "next/og";
 import { SITE } from "@/lib/site";
 
+// A route handler at `/og.png` (instead of the `opengraph-image` metadata
+// route) so the static export writes a real `.png` file. GitHub Pages picks
+// the MIME type from the extension, and an extensionless file is served as
+// `application/octet-stream`, which breaks link previews on social platforms.
 export const dynamic = "force-static";
 
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
-export const alt = `${SITE.nameEn} — ${SITE.roleEn}`;
-
-export default function Image() {
+export async function GET() {
   return new ImageResponse(
     (
       <div
@@ -55,6 +55,6 @@ export default function Image() {
         </div>
       </div>
     ),
-    { ...size },
+    { width: 1200, height: 630 },
   );
 }
