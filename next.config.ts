@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   // GitHub Pages serves static files only, so the app is statically exported.
   output: "export",
   basePath,
+  // GitHub Pages serves "/x" from "x/index.html" and lets a directory shadow
+  // "x.html", so every route is exported with a trailing slash.
+  trailingSlash: true,
   images: { unoptimized: true },
   turbopack: {
     rules: {

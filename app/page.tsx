@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, ChevronDown, Mail, MapPin } from "lucide-react";
 import GithubIcon from "@/components/GithubIcon";
-import { asset } from "@/lib/site";
+import { PROJECTS } from "@/lib/projects";
+import { asset, SITE } from "@/lib/site";
 
 const SKILLS = [
   { name: "NestJS", icon: asset("/icons/nestjs.svg") },
@@ -15,45 +17,6 @@ const SKILLS = [
   { name: "Elasticsearch", icon: asset("/icons/elasticsearch.svg") },
   { name: "RabbitMQ", icon: asset("/icons/rabbitmq.svg") },
   { name: "Jenkins", icon: asset("/icons/jenkins.svg") },
-];
-
-const PROJECTS = [
-  {
-    name: "فروشگاه آنلاین",
-    desc: "یک فروشگاه اینترنتی با پنل مدیریت و درگاه پرداخت.",
-    url: "https://example.com",
-    tags: ["Next.js", "NestJS", "PostgreSQL"],
-  },
-  {
-    name: "پلتفرم رزرو",
-    desc: "سیستم نوبت‌دهی و رزرو آنلاین برای کسب‌وکارها.",
-    url: "https://example.com",
-    tags: ["React", "NestJS", "Redis"],
-  },
-  {
-    name: "داشبورد تحلیلی",
-    desc: "داشبورد گزارش‌گیری با نمودارهای زنده و API اختصاصی.",
-    url: "https://example.com",
-    tags: ["TypeScript", "Docker"],
-  },
-  {
-    name: "اپلیکیشن محتوا",
-    desc: "پلتفرم انتشار محتوا با احراز هویت و اشتراک ویژه.",
-    url: "https://example.com",
-    tags: ["Next.js", "Prisma"],
-  },
-  {
-    name: "سرویس ابری",
-    desc: "یک API عمومی برای سرویس‌های ابری با محدودیت نرخ.",
-    url: "https://example.com",
-    tags: ["NestJS", "Elasticsearch"],
-  },
-  {
-    name: "چت آنی",
-    desc: "پیام‌رسان بلادرنگ با WebSocket و صف پیام.",
-    url: "https://example.com",
-    tags: ["Node.js", "Redis"],
-  },
 ];
 
 export default function Home() {
@@ -83,8 +46,7 @@ export default function Home() {
           </h1>
 
           <p className="mt-7 max-w-xl text-lg leading-9 text-slate-300">
-            با NestJS، TypeScript ، سیستم‌های مقیاس‌پذیر و قابل اتکا
-            می‌سازم.
+            با NestJS و TypeScript، سیستم‌های مقیاس‌پذیر و قابل اتکا می‌سازم.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
@@ -115,7 +77,7 @@ export default function Home() {
       </section>
 
       {/* درباره من */}
-      <section id="about" className="flex min-h-screen items-center px-6 py-24">
+      <section id="about" className="flex items-center px-6 py-14 sm:py-20">
         <div className="mx-auto w-full max-w-6xl rounded-3xl border border-border bg-surface/40 p-8 backdrop-blur-xl sm:p-12">
           <div className="grid gap-10 lg:grid-cols-3">
             <div className="lg:sticky lg:top-28 lg:self-start">
@@ -142,6 +104,26 @@ export default function Home() {
                   معماری نرم‌افزار
                 </strong>{" "}
                 و ساخت محصولات دیجیتال مقیاس‌پذیر است.
+              </p>
+              <p>
+                در <strong className="font-semibold text-foreground">بهیدو</strong>{" "}
+                روی سامانه‌های داخلی و فروشگاه‌های اینترنتی مثل{" "}
+                <strong className="font-semibold text-foreground">
+                  اهان آرتا
+                </strong>
+                ،{" "}
+                <strong className="font-semibold text-foreground">ایواز</strong>،{" "}
+                <strong className="font-semibold text-foreground">
+                  فتحی گالری
+                </strong>
+                ،{" "}
+                <strong className="font-semibold text-foreground">ویزویز</strong>{" "}
+                و{" "}
+                <strong className="font-semibold text-foreground">
+                  تهران جانبی
+                </strong>{" "}
+                کار کرده‌ام؛ از سامانه‌های ERP و پنل‌های مدیریت تا فروشگاه‌های
+                Next.js و Nuxt با APIهای Laravel و NestJS.
               </p>
               <p>
                 برای من، برنامه‌نویسی صرفاً نوشتن کد نیست؛ بلکه پیدا کردن{" "}
@@ -221,7 +203,7 @@ export default function Home() {
       </section>
 
       {/* مهارت‌ها */}
-      <section id="skills" className="flex min-h-screen items-center px-6 py-24">
+      <section id="skills" className="flex items-center px-6 py-14 sm:py-20">
         <div className="mx-auto w-full max-w-6xl rounded-3xl border border-border bg-surface/40 p-8 backdrop-blur-xl sm:p-12">
           <p className="font-display text-sm font-medium uppercase tracking-widest text-accent">
             Skills
@@ -254,45 +236,61 @@ export default function Home() {
       </section>
 
       {/* نمونه‌کارها */}
-      <section id="projects" className="flex min-h-screen flex-col justify-center px-6 py-24">
+      <section id="projects" className="flex flex-col px-6 py-14 sm:py-20">
         <div className="mx-auto w-full max-w-6xl">
           <p className="font-display text-sm font-medium uppercase tracking-widest text-accent">
             Projects
           </p>
           <h2 className="mt-2 text-2xl font-bold text-foreground sm:text-4xl">
-            سایت‌هایی که ساخته‌ام
+            پروژه‌هایی که ساخته‌ام
           </h2>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {PROJECTS.map((project) => (
-              <a
-                key={project.name}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex cursor-pointer flex-col rounded-2xl border border-border bg-surface/40 p-6 backdrop-blur-xl transition-colors duration-200 hover:border-accent/40"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {project.name}
-                  </h3>
-                  <ArrowUpRight className="h-5 w-5 shrink-0 text-muted transition-colors duration-200 group-hover:text-accent" />
-                </div>
-                <p className="mt-3 text-sm leading-7 text-muted">
-                  {project.desc}
-                </p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-surface-2/60 px-3 py-1 font-mono text-xs text-slate-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </a>
-            ))}
+            {PROJECTS.slice(0, 6).map((project) => {
+              const external = Boolean(project.url);
+              const href = project.url ?? asset("/projects/");
+
+              return (
+                <a
+                  key={project.slug}
+                  href={href}
+                  {...(external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="group flex cursor-pointer flex-col rounded-2xl border border-border bg-surface/40 p-6 backdrop-blur-xl transition-colors duration-200 hover:border-accent/40"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {project.name}
+                    </h3>
+                    <ArrowUpRight className="h-5 w-5 shrink-0 text-muted transition-colors duration-200 group-hover:text-accent" />
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-muted">
+                    {project.desc}
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-surface-2/60 px-3 py-1 font-mono text-xs text-slate-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/projects/"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/40 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur transition-colors duration-200 hover:border-accent/50 hover:text-accent"
+            >
+              مشاهده‌ی همه‌ی نمونه‌کارها
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -300,7 +298,7 @@ export default function Home() {
       {/* تماس */}
       <section
         id="contact"
-        className="flex min-h-screen flex-col items-center justify-center px-6 text-center"
+        className="flex flex-col items-center px-6 py-14 text-center sm:py-20"
       >
         <p className="font-display text-sm font-medium uppercase tracking-widest text-accent">
           Contact
@@ -314,17 +312,17 @@ export default function Home() {
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="mailto:hello@example.com"
+            href={`mailto:${SITE.email}`}
             className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-background transition-colors duration-200 hover:bg-green-400"
           >
             <Mail className="h-4 w-4" />
-            hello@example.com
+            {SITE.email}
           </a>
         </div>
 
         <div className="mt-10 flex items-center gap-4 text-muted">
           <a
-            href="https://github.com/cs-esmaeili"
+            href={SITE.github}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full border border-border p-3 transition-colors duration-200 hover:border-accent/50 hover:text-accent"
