@@ -6,6 +6,10 @@ import type { NextConfig } from "next";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // Keep the upgrade policy pinned to security fixes when agents run Next.js.
+    agentUpgrade: "security",
+  },
   // GitHub Pages serves static files only, so the app is statically exported.
   output: "export",
   basePath,
