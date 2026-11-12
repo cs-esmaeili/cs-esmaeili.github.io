@@ -296,44 +296,43 @@ export default function Home() {
       </section>
 
       {/* تماس */}
-      <section
-        id="contact"
-        className="flex flex-col items-center px-6 py-14 text-center sm:py-20"
-      >
-        <p className="font-display text-sm font-medium uppercase tracking-widest text-accent">
-          Contact
-        </p>
-        <h2 className="mt-3 text-3xl font-bold text-foreground sm:text-5xl">
-          بیا با هم کار کنیم.
-        </h2>
-        <p className="mt-5 max-w-md text-muted">
-          پروژه‌ای در ذهن داری؟ خوشحال می‌شوم بشنوم.
-        </p>
+      <section id="contact" className="flex items-center px-6 py-14 sm:py-20">
+        <div className="mx-auto w-full max-w-6xl rounded-3xl border border-border bg-surface/40 p-8 text-center backdrop-blur-xl sm:p-12">
+          <p className="font-display text-sm font-medium uppercase tracking-widest text-accent">
+            Contact
+          </p>
+          <h2 className="mt-3 text-3xl font-bold text-foreground sm:text-5xl">
+            بیا با هم کار کنیم.
+          </h2>
+          <p className="mx-auto mt-5 max-w-md text-muted">
+            پروژه‌ای در ذهن داری؟ خوشحال می‌شوم بشنوم.
+          </p>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href={`mailto:${SITE.email}`}
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-background transition-colors duration-200 hover:bg-green-400"
-          >
-            <Mail className="h-4 w-4" />
-            {SITE.email}
-          </a>
-        </div>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href={`mailto:${SITE.email}`}
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-background transition-colors duration-200 hover:bg-green-400"
+            >
+              <Mail className="h-4 w-4" />
+              {SITE.email}
+            </a>
+          </div>
 
-        <div className="mt-10 flex items-center gap-4 text-muted">
-          <a
-            href={SITE.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-border p-3 transition-colors duration-200 hover:border-accent/50 hover:text-accent"
-            aria-label="GitHub"
-          >
-            <GithubIcon className="h-5 w-5" />
-          </a>
-          <span className="inline-flex items-center gap-2 text-sm">
-            <MapPin className="h-4 w-4" />
-            ایران
-          </span>
+          <div className="mt-10 flex items-center justify-center gap-4 text-muted">
+            <a
+              href={SITE.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-border p-3 transition-colors duration-200 hover:border-accent/50 hover:text-accent"
+              aria-label="GitHub"
+            >
+              <GithubIcon className="h-5 w-5" />
+            </a>
+            <span className="inline-flex items-center gap-2 text-sm">
+              <MapPin className="h-4 w-4" />
+              ایران
+            </span>
+          </div>
         </div>
       </section>
     </div>
