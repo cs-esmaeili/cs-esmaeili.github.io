@@ -7,8 +7,14 @@ export const asset = (path: string) => `${BASE_PATH}${path}`;
 // تنظیمات مرکزی سایت — اینجا را ویرایش کن.
 // برای محیط تولید، دامنه‌ی واقعی را در متغیر محیطی NEXT_PUBLIC_SITE_URL بگذار
 // (یا همین مقدار پیش‌فرض را عوض کن).
+// آدرس پایه باید بدون «/» انتهایی باشد تا ترکیب مسیرها در sitemap و JSON-LD
+// هیچ‌وقت «//» تولید نکند.
+const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cs-esmaeili.github.io"
+).replace(/\/+$/, "");
+
 export const SITE = {
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://cs-esmaeili.github.io",
+  url: SITE_URL,
   nameFa: "جواد اسماعیلی",
   nameEn: "Javad Esmaeili",
   roleFa: "توسعه‌دهنده بک‌اند",
