@@ -29,6 +29,20 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Sitemap
+
+`sitemap.xml` is a plain static file checked into `public/` (with an identical
+copy at `public/sitemaps/main.xml` used as an alternate submission path in
+Search Console). It is generated from the slugs in `lib/projects.ts`:
+
+```bash
+pnpm sitemap          # regenerate public/sitemap.xml + public/sitemaps/main.xml
+pnpm sitemap --check  # fails if the files are stale (run by CI)
+```
+
+Run `pnpm sitemap` after adding, renaming, or removing a project, and commit
+the generated files.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
