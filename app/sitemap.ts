@@ -12,29 +12,17 @@ const pageUrl = (path: string) => {
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // تاریخ ساخت نسخه‌ی استاتیک؛ در هر دیپلوی مقدار تازه می‌گیرد.
-  const lastModified = new Date();
-
-  const projectPages: MetadataRoute.Sitemap = PROJECTS.map((project) => ({
-    url: pageUrl(`/projects/${project.slug}`),
-    lastModified,
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
+  // فقط <loc> و <lastmod> می‌فرستیم؛ changefreq و priority را گوگل نادیده
+  // می‌گیرد و حذفشان سند را ساده و بدون ابهام می‌کند.
+  // date-only دقیقاً همان قالبی است که مستندات گوگل مثال می‌زند.
+  const lastModified = new Date().toISOString().slice(0, 10);
 
   return [
-    {
-      url: pageUrl("/"),
+    { url: pageUrl("/"), lastModified },
+    { url: pageUrl("/projects"), lastModified },
+    ...PROJECTS.map((project) => ({
+      url: pageUrl(`/projects/${project.slug}`),
       lastModified,
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-    {
-      url: pageUrl("/projects"),
-      lastModified,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    ...projectPages,
+    })),
   ];
 }
