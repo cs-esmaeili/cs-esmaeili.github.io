@@ -43,6 +43,30 @@ pnpm sitemap --check  # fails if the files are stale (run by CI)
 Run `pnpm sitemap` after adding, renaming, or removing a project, and commit
 the generated files.
 
+## Deploy on Cloudflare Workers (static assets)
+
+The app is a static export, so Cloudflare only needs to serve `out/`. `wrangler.jsonc`
+declares an assets-only Worker (no server runtime, no OpenNext), and the committed
+`out/` directory is uploaded as-is.
+
+In the Worker's **Settings → Build**, use:
+
+| Setting | Value |
+| --- | --- |
+| Build command | `pnpm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Build variable | `NEXT_PUBLIC_SITE_URL=https://<production-domain>` |
+
+Leave `NEXT_PUBLIC_BASE_PATH` unset: Cloudflare serves the site from the domain
+root, unlike the GitHub Pages project site.
+
+Do not accept Cloudflare's automatic "Next.js / OpenNext" migration. `wrangler.jsonc`
+points Wrangler at `./out`, which skips that auto-configuration. To try it locally:
+
+```bash
+pnpm build && pnpm preview   # serves out/ at http://localhost:8787
+```
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
