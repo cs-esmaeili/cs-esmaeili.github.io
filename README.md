@@ -43,29 +43,29 @@ pnpm sitemap --check  # fails if the files are stale (run by CI)
 Run `pnpm sitemap` after adding, renaming, or removing a project, and commit
 the generated files.
 
-## Deploy on Cloudflare Workers (static assets)
+## Deploy on Cloudflare Pages
 
-The app is a static export, so Cloudflare only needs to serve `out/`. `wrangler.jsonc`
-declares an assets-only Worker (no server runtime, no OpenNext), and the committed
-`out/` directory is uploaded as-is.
+Primary site: **https://cs-esmaeili.pages.dev** (canonical origin, see `lib/site.ts`).
 
-In the Worker's **Settings → Build**, use:
+The app is a static export, so Pages only serves `out/`. `wrangler.jsonc` is a
+**Pages** config (`pages_build_output_dir` → `./out`), not a Workers config; it
+makes the Pages build output directory explicit and prevents the build system
+from guessing a nonexistent directory.
+
+In the Pages project's **Build configuration**:
 
 | Setting | Value |
 | --- | --- |
-| Build command | `pnpm run build` |
-| Deploy command | `npx wrangler deploy` |
-| Build variable | `NEXT_PUBLIC_SITE_URL=https://<production-domain>` |
+| Build command | `pnpm run build` (or `npx next build`) |
+| Build output directory | `out` (overridden by `wrangler.jsonc`) |
+| Build variable | none required; `NEXT_PUBLIC_SITE_URL` defaults to `https://cs-esmaeili.pages.dev` |
 
-Leave `NEXT_PUBLIC_BASE_PATH` unset: Cloudflare serves the site from the domain
-root, unlike the GitHub Pages project site.
+Leave `NEXT_PUBLIC_BASE_PATH` unset on Pages: the site is served from the domain
+root. The GitHub Pages workflow still deploys a mirror and lets URLs resolve
+against the canonical `pages.dev` origin.
 
-Do not accept Cloudflare's automatic "Next.js / OpenNext" migration. `wrangler.jsonc`
-points Wrangler at `./out`, which skips that auto-configuration. To try it locally:
-
-```bash
-pnpm build && pnpm preview   # serves out/ at http://localhost:8787
-```
+Do not add Workers-only keys (`main`, `assets`) to `wrangler.jsonc`, and do not
+accept a Workers "Next.js / OpenNext" migration for this repository.
 
 ## Deploy on Vercel
 

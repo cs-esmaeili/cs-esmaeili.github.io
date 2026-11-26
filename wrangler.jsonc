@@ -1,17 +1,16 @@
-// Cloudflare Workers deployment: static assets only.
+// Cloudflare Pages configuration (static site).
 //
 // The site is a Next.js static export (`output: "export"` in next.config.ts),
-// so there is no server script. Wrangler uploads `./out` and serves it directly.
-// Without this file, `wrangler deploy` runs Cloudflare's automatic project
-// configuration, which detects Next.js and tries to migrate the project to
-// OpenNext (a server-side runtime) instead of deploying the static export.
+// so the build output is `./out`. Declaring `pages_build_output_dir` here makes
+// the Pages build use it instead of the dashboard setting (which was resolving
+// to a nonexistent "export" directory). This file is the source of truth for
+// Pages build configuration.
+//
+// This is a Pages config, not a Workers config: do not add Workers-only keys
+// such as `main` or `assets`.
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "cs-esmaeili-github-io",
-  "compatibility_date": "2026-11-23",
-  "assets": {
-    "directory": "./out",
-    // Serve out/404.html for unknown paths (Next.js exports it).
-    "not_found_handling": "404-page"
-  }
+  "name": "cs-esmaeili",
+  "pages_build_output_dir": "./out",
+  "compatibility_date": "2026-11-23"
 }

@@ -10,7 +10,7 @@ export const asset = (path: string) => `${BASE_PATH}${path}`;
 // آدرس پایه باید بدون «/» انتهایی باشد تا ترکیب مسیرها در sitemap و JSON-LD
 // هیچ‌وقت «//» تولید نکند.
 const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cs-esmaeili.github.io"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://cs-esmaeili.pages.dev"
 ).replace(/\/+$/, "");
 
 export const SITE = {

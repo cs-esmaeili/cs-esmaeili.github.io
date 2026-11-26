@@ -10,7 +10,8 @@ const nextConfig: NextConfig = {
     // Keep the upgrade policy pinned to security fixes when agents run Next.js.
     agentUpgrade: "security",
   },
-  // GitHub Pages serves static files only, so the app is statically exported.
+  // Cloudflare Pages is the primary host; GitHub Pages is deployed as a mirror
+  // from the same static export.
   output: "export",
   basePath,
   // GitHub Pages serves "/x" from "x/index.html" and lets a directory shadow

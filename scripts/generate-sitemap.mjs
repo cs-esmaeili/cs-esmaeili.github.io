@@ -19,7 +19,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const SITE_URL = (process.env.SITE_URL ?? "https://cs-esmaeili.github.io").replace(/\/+$/, "");
+const SITE_URL = (process.env.SITE_URL ?? "https://cs-esmaeili.pages.dev").replace(/\/+$/, "");
 
 const read = (p) => readFileSync(join(root, p), "utf8");
 

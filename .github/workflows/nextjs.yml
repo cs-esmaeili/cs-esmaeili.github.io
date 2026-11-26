@@ -85,9 +85,9 @@ jobs:
           # Project sites are served from /<repo>; expose it to next.config.ts so
           # basePath (links + assets) and public/ asset URLs line up.
           NEXT_PUBLIC_BASE_PATH: ${{ steps.setup_pages.outputs.base_path }}
-          # Canonical URL used by robots.txt, sitemap.xml and the OG image.
-          # Override this if you later attach a custom domain.
-          NEXT_PUBLIC_SITE_URL: ${{ steps.setup_pages.outputs.base_url }}
+          # Canonical URLs (robots.txt, sitemap, OG image) deliberately stay on
+          # the primary origin, https://cs-esmaeili.pages.dev (lib/site.ts).
+          # Set NEXT_PUBLIC_SITE_URL here only if GitHub Pages becomes primary.
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

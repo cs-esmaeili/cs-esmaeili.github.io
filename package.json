@@ -7,9 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sitemap": "node scripts/generate-sitemap.mjs",
-    "deploy": "wrangler deploy",
-    "preview": "wrangler dev"
+    "sitemap": "node scripts/generate-sitemap.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.9",
@@ -30,8 +28,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "tailwindcss": "^4",
-    "typescript": "^5",
-    "wrangler": "^4.168.0"
+    "typescript": "^5"
   },
   "packageManager": "pnpm@12.6.0"
 }
